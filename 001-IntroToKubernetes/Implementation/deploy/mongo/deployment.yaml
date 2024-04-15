@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: content-mongo
+spec:
+  selector:
+    matchLabels:
+      app: content-mongo
+  template:
+    metadata:
+      labels:
+        app: content-mongo
+    spec:
+      containers:
+      - name: content-mongo
+        image: mongo
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 27017

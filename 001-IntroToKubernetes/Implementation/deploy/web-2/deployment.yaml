@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: content-web
+  labels:
+    app: content-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: content-web
+  template:
+    metadata:
+      labels:
+        app: content-web
+    spec:
+      containers:
+      - name: content-web
+        image: whatthehackmsft/content-web:v2
+        env:
+          - name: CONTENT_API_URL
+            value: http://content-api
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 3000
